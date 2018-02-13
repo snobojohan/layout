@@ -1,0 +1,88 @@
+$gap-std: 10px;
+$height-menu-std: 60px;
+$height-menu-high: $height-menu-std * 2;
+
+.app-header {
+  background-color: #bbb;
+  height: $height-menu-std;
+
+  @include tablet-and-larger {
+    height: $height-menu-high;
+  }
+  padding: $gap-std;
+  color: #000;
+  display: grid;
+  
+  position: fixed;
+  width: 100%;
+
+  // GRID
+  grid-template-columns: 40px 1fr 40px;
+  grid-gap: 10px;
+
+  div {
+    background: #cdf0e6;
+    border: 1px solid #87d7cd;
+    text-align: center;
+  }
+
+  .card1 {
+      grid-column: 1;
+      grid-row: 1;
+  }
+
+  .card2 {
+      display: none;
+
+      @include tablet-and-larger {
+        grid-column: 2;
+        grid-row: 1;
+        display: block;
+      }
+  }
+
+  .card3 {
+      grid-row: 1;
+  }
+
+  .card4 {
+      grid-column: 2;
+      grid-row: 1;
+      
+      @include tablet-and-larger {
+        grid-row: 2;
+        grid-column: 1 / 4;
+      }
+  }
+
+}
+
+.app-body {
+  background: #fff;
+  padding:  ($height-menu-std + $gap-std * 2) $gap-std $gap-std $gap-std;
+  min-height: 1500px;
+
+    @include desktop {
+      max-width: $tablet-width - ($gap-std * 2);
+      margin: 0 auto;
+    }
+
+  .intro {
+    font-size: 150%;
+  }
+
+  p {
+    max-width: 30em;
+    font-size: 16px;
+    line-height: 1.4em;
+
+    @include tablet {
+      font-size: 18px;
+    }
+
+    @include desktop {
+      font-size: 20px;
+    }
+
+  }
+}
