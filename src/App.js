@@ -1,17 +1,82 @@
 import React, { Component } from 'react';
 
 class App extends Component {
+
+  state = { theClass: "top" };
+
+  componentDidMount(){
+    
+    var theClass = 'top';
+
+    // Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
+
+    var last_known_scroll_position = 0;
+    var ticking = false;
+
+    var _self = this;
+
+    function doSomething(scroll_pos) {
+
+
+
+      if(window.scrollY > 100){
+           theClass = 'scrolled';
+      } else {
+        theClass = 'top';
+      }
+
+
+          console.log(theClass);
+
+       _self.setState({
+          activeClass: theClass
+       })
+  }
+
+    window.addEventListener('scroll', function(e) {
+
+      last_known_scroll_position = window.scrollY;
+
+      if (!ticking) {
+
+        window.requestAnimationFrame(function() {
+          doSomething(last_known_scroll_position);
+          ticking = false;
+        });
+         
+        ticking = true;
+
+      }
+      
+    });
+
+    /*
+      
+      window.addEventListener('scroll', (event) => {
+        
+
+         if(window.scrollY > 100){
+             theClass = 'normal';
+         } 
+
+         this.setState({
+            activeClass: theClass
+         })
+
+      });
+      */
+  }
   render() {
     return (
       <div className="app">
 
-        <header className="app-header">
+        <header className={"app-header " + this.state.activeClass}>
           
-          <div className="card1">Menu</div>
-          <div className="card2">LOGO</div>
-          <div className="card3">Cart</div>
+          <div className={"card-menu " + this.state.activeClass}>Menu</div>
+          <div className="card-logo">LOGO</div>
+          <div className="card-cart">Cart</div>
 
-          <div className="card4">SEARCH</div>
+          <div className={"card-search " + this.state.activeClass}>SEARCH</div>
 
         </header>
         <section className="app-body">
